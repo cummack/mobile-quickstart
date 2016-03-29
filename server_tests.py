@@ -9,7 +9,6 @@ class ServerTestCase(unittest.TestCase):
 
     def setUp(self):
         self.app = server.app.test_client()
-        pass
 
 
     def test_welcome_twiml(self):
@@ -33,7 +32,7 @@ class ServerTestCase(unittest.TestCase):
 
 
     def test_token_generation(self):
-        """Tests the '/token' URL to ensure that a JWT token is returned that
+        """Tests the '/token' URL to ensure that a JWT token is returned that it,
         at least closely resembles a valid Twilio Capability token."""
 
         response = self.app.get('/token')

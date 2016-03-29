@@ -25,7 +25,7 @@ AUTH_TOKEN = 'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY'
 APP_SID = 'APZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
 CALLER_ID = '+12345678901'
 
-# This is the Client name used for incoming calls from PSTN phones
+# This is the Client name that incoming calls from PSTN phones will be routed to
 CLIENT = 'jenny'
 
 
@@ -108,9 +108,9 @@ def call():
     else:
       # PSTN Phone => Twilio Client
       dial.client(CLIENT)
-      
 
   return Response(str(resp), mimetype='application/xml')    
+
 
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
