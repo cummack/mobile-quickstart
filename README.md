@@ -29,7 +29,13 @@ If you prefer to run the application locally, make sure that you have `python` a
 
     pip install -r requirements.txt
 
-Open `server.py` and replace the constants `ACCOUNT_SID`, `AUTH_TOKEN`, `APP_SID` and `CALLER_ID` with the relevant values from your Twilio account. Run the application using `python server.py`.  Then, use `ngrok` to open up Internet access to your server: 
+Open `server.py` and replace the constants `ACCOUNT_SID`, `AUTH_TOKEN`, `APP_SID` and `CALLER_ID` with the relevant values from your Twilio account. 
+
+Run the application using:
+
+	python server.py  
+
+Then, use `ngrok` to open up Internet access to your server: 
 
     ngrok http 5000
 
