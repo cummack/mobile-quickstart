@@ -1,6 +1,6 @@
 {
   "name": "Twilio Mobile Quickstart",
-  "description": "A simple Python server to distribute capability tokens and route calls for your mobile app",
+  "description": "A simple Python server to generate Capability Tokens (JWT tokens) and route calls using TwiML for your Twilio Client mobile apps.",
   "repository": "https://github.com/vassjozsef/mobile-quickstart",
   "logo": "https://static1.twilio.com/packages/company/img/logos_icon_round.png",
   "keywords": [
