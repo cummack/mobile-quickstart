@@ -6,7 +6,7 @@ import twilio.twiml
 """
 Set the following contants if you do not intend to set environment variables.
 
-Your AccountSid and AuthToken can be found in your Twilio Dashboard:
+Your AccountSid and Auth Token can be found in your Twilio Dashboard:
 https://www.twilio.com/user/account/voice/dashboard
 
 Create a TwiML Application and copy its AppSid:

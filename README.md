@@ -1,53 +1,49 @@
-Mobile Quickstart
-===
+# Twilio Client Mobile (iOS + Android) - Quickstart Tutorial Server
 
-This repository is located at [https://github.com/twilio/mobile-quickstart](https://github.com/twilio/mobile-quickstart).
+Find me at [https://github.com/twilio/mobile-quickstart](https://github.com/twilio/mobile-quickstart).
 
-This repository includes server-side web application required for Twilio mobile sample apps such as Quickstart and BasicPhone. The Python script is responsible for generating capability tokens and serving TwiML.
+This repository includes a server-side web application that is required by Twilio Client mobile sample apps such as the Quickstart tutorial for [Android](https://www.twilio.com/docs/quickstart/php/android-client) and [iOS](https://www.twilio.com/docs/quickstart/php/ios-client). 
 
-Prerequisites
----
+This small Python/[Flask](http://flask.pocoo.org) app is responsible for generating [Twilio Capability Tokens](https://www.twilio.com/docs/api/client/capability-tokens) in JWT format and for serving [TwiML](https://www.twilio.com/docs/api/twiml).
 
-Please [sign up](https://www.twilio.com/try-twilio) for a free Twilio account. You will need your Account Sid and Auth Token available in your [Account Dashboard](https://www.twilio.com/user/account/). You will also need to create a [TwiML App](https://www.twilio.com/user/account/apps). Please make sure that you point the TwiML app's Voice Request URL to your web application's public URL, e.g.,  http://companyfoo.com/call.
-You will also need a verified phone number to be used as caller ID when placing phone calls.  See the "Verified Caller Ids" section
-under [Numbers](https://www.twilio.com/user/account/phone-numbers)
-tab in your Twilio Account.
+## Prerequisites
 
-Deployment
----
+If you don't have one already, you'll need a [Twilio Account](https://www.twilio.com/try-twilio).
 
-In order to Twilio can communicate with your web application, it needs to be
-deployed on the public Internet.  Some of the options include using [Heroku](https://heroku.com/), [ngrok](https://ngrok.com/), etc.
+To deploy the app, you'll need your Twilio Account Sid and Auth Token, both available from your [Twilio Account Dashboard](https://www.twilio.com/user/account/). You will also need to create a [TwiML App](https://www.twilio.com/user/account/apps). 
 
-Click the button below to automatically set up the app using your Heroku account. Please enter your Twilio Account Sid, Auth token, TwiML App Sid and verified phone number when prompted.
+You will also need a [verified phone number](https://www.twilio.com/user/account/phone-numbers/verified) to use as Caller ID.  Or you can use any [Twilio Phone Number](https://www.twilio.com/user/account/phone-numbers/incoming) that you've already purchased. 
+
+
+## Deployment
+
+So that Twilio can communicate with your web application, it needs to be accessible via the public Internet. Two of the simplest options for deployment are hosting the app on [Heroku](https://heroku.com/), or using [ngrok](https://ngrok.com/) to enable Twilio's servers to reach the web server on your development machine.
+
+#### Option 1: Heroku
+Use the Heroku Button below to automatically install the app into your Heroku account. You will need to enter your Twilio Account Sid, Auth Token, TwiML App Sid and verified phone number when prompted.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-If you prefer to run your application locally, please make sure that you have Python and `pip` installed. Please install the required packages:
+#### Option 2: Local + Ngrok
+If you prefer to run the application locally, make sure that you have `python` and `pip` installed, then install the required packages:
 
     pip install -r requirements.txt
 
-Please replace `ACCOUNT_SID`, `AUTH_TOKEN`, `APP_SID` and `CALLER_ID` in `server.py` with values from your Twilio account.  Simply run the application by `python server.py`.  You can tunnel `localhost` to the public Internet using `ngrok`: 
+Open `server.py` and replace the constants `ACCOUNT_SID`, `AUTH_TOKEN`, `APP_SID` and `CALLER_ID` with the relevant values from your Twilio account. Run the application using `python server.py`.  Then, use `ngrok` to open up Internet access to your server: 
 
-    ngrok 5000
+    ngrok http 5000
 
-Testing
----
+#### Option 3: Anywhere Else!
+This repository constitutes a standard python application utilizing the Flask micro-framework. Feel free to deploy it to any host where it can be reached by Twilio's servers via the Internet. 
 
-Please open http://companyfoo.com/token in your browser. You should see a long string.
+#### Final Steps
+Lastly, configure your TwiML App's Voice Request URL to point at your newly deployed web application's `/call` URL. e.g.: `http://babbling-bobby-1432.herokuapp.com/call`.
+
+## Testing
+
+run `python server_tests.py` at your terminal, or experiment manually at `http://localhost:5000/token` and `http://localhost:5000/call?To=client:bob&From=client:alice`, etc. 
 
 
-Client Configuration
----
+## Client App Configuration
 
-Please modify BasicPhone and Quickstart to point to your web applications's public URL.
-
-
-Usage
----
-
-At launch, the client connects to http://companyfoo.com/token to retrieve its capability token.
-
-When you hit the "Call" button in the mobile app, it makes a call to your Twilio application that then makes a request to your web server (http://companyfoo.com/call).  The script routes the call accordingly, either to a phone number or to another client. 
-
-If you want to receive a phone call in your mobile app you need to have a Twilio phone number (https://www.twilio.com/user/account/phone-numbers/incoming).  Please configure the phone number's Voice Request URL to point to your web application's public URL (http://companyfoo.com/call). When someone calls your Twilio phone number, Twilio makes a request to your web application. Your web application returns TwiML that instructs Twilio to connect the phone call with client `jenny`. Either a purchased number or your sandbox number can be used.
+You will need to modify the Twilio Client sample applications to point at the `/token` URL of your web server in order to fetch a Capability Token. Details are included in the application tutorials on Twilio's website.
