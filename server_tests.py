@@ -44,6 +44,18 @@ class ServerTestCase(unittest.TestCase):
         account_sid = jwt_body.get('iss')
         assert account_sid.startswith('AC')
 
+    def test_token_generation_with_incoming(self):
+        """Tests the '/token' URL to ensure that when a client name is provided,
+        it is reflected in the 'incoming' scope of the Capability Token."""
+        client_name = 'alice'
+        response = self.app.get('/token?client=' + client_name)
+        
+        # The returned JWT is *probably* a Twilio Capability token with a valid
+        # incoming name
+        jwt_body = jwt.decode(response.get_data(), None, False)
+        capabilities = jwt_body.get('scope')
+        assert ('client:incoming?clientName=' + client_name) in capabilities
+
 
     def test_client_to_phone_twiml(self):
         """Tests '/call' to validate 'Twilio Client => PSTN Phone' call TwiML 
